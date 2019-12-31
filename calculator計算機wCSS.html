@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>計算機</title>
+    <style>
+
+        * {
+            font-size:1.1em;
+            font-family: Georgia, 'Times New Roman', Times, serif, "微軟正黑體";
+        }
+
+        body{
+            background-color: aqua; 
+            margin: 0;
+            text-align: center;
+        }
+
+        td:not(#input) {
+            cursor: pointer;
+            /* 不是input的欄位滑鼠變成手指 */
+        }   
+
+        table{
+            margin: auto;           
+            background-color: white;
+
+        }
+        .td1{
+            width:50px;
+            height:25px;
+            text-align: center;
+            padding:10px;
+            border-color: pink;
+            background-color: white;
+        }
+        .td2{
+            width:50px;
+            height:25px;
+            text-align: center;
+            padding:10px;
+            border-color: pink;
+            background-color: greenyellow;
+        }
+
+        #input{
+            height:25px;
+            padding:10px;
+            text-align: right;
+            font-size: 2em;
+        }        
+
+        #particles {
+            height: 100vh;
+            width: 100vw;
+            position: fixed;
+            z-index: -1;
+            /* 作為背景用，圖層要放-1 */
+            background-image: linear-gradient(rgba(0,0,0,0.5)), url(xmasEve.jpg);
+            background:transparent;
+            background-position: center;
+            background-attachment: fixed;
+            background-size: cover;
+            top: 0;
+
+        }    
+
+    </style>
+</head>
+
+
+<body> 
+
+    <div id="particles"></div>
+
+    <h1 style="font-size:1.5em">計算機</h1>
+    <table border="1"> 
+
+        <tr>
+            <td colspan="4" id="input">0</td>
+        </tr>
+        <tr>
+            <td class="td2">C</td >
+            <td class="td2">/</td>
+            <td class="td2">*</td>
+            <td class="td2">-</td>
+        </tr>
+        <tr>
+            <td class="td1">7</td>
+            <td class="td1">8</td>
+            <td class="td1">9</td>
+            <td class="td2" rowspan="2">+</td>
+        </tr>
+        <tr>
+            <td class="td1">4</td>
+            <td class="td1">5</td>
+            <td class="td1">6</td>
+        </tr>
+        <tr>
+            <td class="td1">1</td>
+            <td class="td1">2</td>
+            <td class="td1">3</td>
+            <td class="td2" rowspan="2">=</td>
+        </tr>
+        <tr>
+            <td class="td1" colspan="2">0</td>
+            <td class="td1">.</td>
+        </tr>
+    </table>
+
+  
+
+
+
+<script src="./particles.min.js"></script>
+
+    <script>
+        let minput = document.getElementById("input");
+        let td = document.getElementsByTagName("td");
+        let operator = ["+", "-", "*", "/", "Enter", "."];
+
+        for(let i=0;i<td.length;i++){
+            if(td[i].id != "input") {
+                td[i].onclick = () => {
+                    addNumber(td[i].innerText);                 
+                }
+            }
+        }
+
+        document.onkeydown = (event) => {
+            let key = event.key;
+            if(!isNaN(key) || operator.includes(key)) {
+                addNumber(key);
+            }
+        }
+
+        let addNumber = (number) => {
+            if(number == "C"){
+                input.innerText = "0";
+            }
+            else if(number == "=" || number == "Enter"){
+                input.innerText = eval(input.innerText);
+            }
+            else {
+                if(input.innerText == "0") {
+                    input.innerText = number;                    
+                }
+                else {
+                    input.innerText += number;
+                }
+            }
+        }
+
+    particlesJS.load('particles', './particlesjs-config.json', function() {
+    console.log('callback - particles.js config loaded');
+    });
+
+   </script>
+    </script>
+</body>
+</html>
